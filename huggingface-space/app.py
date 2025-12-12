@@ -1,6 +1,7 @@
 """
 HR-AI Interview Simulation V2 - Full Premium UI
 Complete Flask Application with Premium Frontend
+Deployed: December 2024
 """
 
 import os
@@ -72,6 +73,16 @@ def generate_content_with_groq(prompt):
 @app.route('/')
 def index():
     return send_file('static/index.html')
+
+# Serve login page
+@app.route('/login.html')
+def login():
+    return send_file('static/login.html')
+
+# Serve signup page
+@app.route('/signup.html')
+def signup():
+    return send_file('static/signup.html')
 
 # Serve static assets
 @app.route('/assets/<path:filename>')

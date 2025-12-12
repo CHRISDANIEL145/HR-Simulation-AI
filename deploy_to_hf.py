@@ -30,14 +30,23 @@ def deploy():
     except Exception as e:
         print(f"Note: {e}")
     
+    # List files to upload
+    print("\n📁 Files to upload:")
+    for root, dirs, files in os.walk("huggingface-space"):
+        for file in files:
+            filepath = os.path.join(root, file)
+            print(f"   - {filepath}")
+    
     # Upload the huggingface-space folder
     try:
         upload_folder(
             folder_path="huggingface-space",
             repo_id=repo_id,
             repo_type="space",
+            commit_message="Deploy complete premium UI application",
+            allow_patterns=["*"],
         )
-        print(f"✅ Files uploaded successfully!")
+        print(f"\n✅ Files uploaded successfully!")
         print(f"\n🎉 Your app is deploying at:")
         print(f"   https://huggingface.co/spaces/{repo_id}")
         print(f"\n⚠️  Don't forget to add your GROQ_API_KEY secret in Space settings!")
