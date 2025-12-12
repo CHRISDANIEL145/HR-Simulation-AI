@@ -1,0 +1,5 @@
+Flask
+Flask-Cors
+groq
+PyPDF2
+python-dotenv
