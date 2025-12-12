@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IntervuAI Pro - Next-Gen AI Interview Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/premium.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="premium-bg">
+        <div class="gradient-mesh"></div>
+        <div class="neural-network">
+            <canvas id="neuralCanvas"></canvas>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="premium-nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="brand-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <span class="brand-text">IntervuAI<span class="brand-pro">Pro</span></span>
+            </div>
+            <div class="nav-menu">
+                <a href="#" class="nav-link active">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <div class="nav-user">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-info">
+                        <span class="user-name">Guest User</span>
+                        <span class="user-role">Premium Access</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="premium-main">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-sparkles"></i>
+                    <span>Powered by Advanced AI</span>
+                </div>
+                <h1 class="hero-title">
+                    Next-Generation
+                    <span class="gradient-text">AI Interview</span>
+                    Platform
+                </h1>
+                <p class="hero-subtitle">
+                    Experience intelligent candidate evaluation with real-time AI analysis,
+                    automated scoring, and comprehensive insights.
+                </p>
+                <div class="hero-actions">
+                    <button class="btn-primary" onclick="scrollToUpload()">
+                        <i class="fas fa-rocket"></i>
+                        <span>Start Interview</span>
+                        <div class="btn-glow"></div>
+                    </button>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">10K+</div>
+                        <div class="stat-label">Interviews</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-value">98%</div>
+                        <div class="stat-label">Accuracy</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-value">AI</div>
+                        <div class="stat-label">Powered</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Upload Section -->
+        <section class="upload-section" id="uploadSection">
+            <div class="glass-card large">
+                <div class="card-header">
+                    <div class="header-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <div class="header-content">
+                        <h2 class="card-title">Upload Resume</h2>
+                        <p class="card-subtitle">AI-powered resume analysis in seconds</p>
+                    </div>
+                </div>
+                
+                <div class="upload-area" id="uploadArea">
+                    <input type="file" id="resumeInput" accept=".pdf" hidden>
+                    <div class="upload-icon">
+                        <i class="fas fa-file-upload"></i>
+                    </div>
+                    <h3 class="upload-title">Drop your resume here</h3>
+                    <p class="upload-text">or click to browse</p>
+                    <div class="upload-formats">
+                        <span class="format-badge">PDF</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Setup Section (Hidden) -->
+        <section class="upload-section hidden" id="setupSection">
+            <div class="glass-card large">
+                <div class="card-header">
+                    <div class="header-icon">
+                        <i class="fas fa-user-check"></i>
+                    </div>
+                    <div class="header-content">
+                        <h2 class="card-title">Candidate Profile</h2>
+                        <p class="card-subtitle">Review and configure interview</p>
+                    </div>
+                </div>
+                <div class="profile-display" id="profileDisplay"></div>
+                <div class="form-group" style="margin-top: 2rem;">
+                    <label class="form-label"><i class="fas fa-briefcase"></i> Position/Role</label>
+                    <input type="text" id="positionInput" class="form-input" placeholder="e.g., Senior Software Engineer">
+                </div>
+                <div class="interview-actions" style="margin-top: 2rem;">
+                    <button class="btn-secondary" onclick="location.reload()">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <button class="btn-primary" onclick="startInterview()">
+                        <span>Start Interview</span>
+                        <i class="fas fa-arrow-right"></i>
+                        <div class="btn-glow"></div>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interview Section (Hidden) -->
+        <section class="interview-section hidden" id="interviewSection">
+            <div class="glass-card">
+                <div class="interview-header">
+                    <div class="progress-indicator">
+                        <div class="progress-circle">
+                            <svg viewBox="0 0 100 100">
+                                <circle cx="50" cy="50" r="45"></circle>
+                                <circle cx="50" cy="50" r="45" class="progress-ring" id="progressRing"></circle>
+                            </svg>
+                            <span class="progress-number" id="progressNumber">1/10</span>
+                        </div>
+                    </div>
+                    <div class="timer">
+                        <i class="fas fa-clock"></i>
+                        <span id="timer">00:00</span>
+                    </div>
+                </div>
+                
+                <div class="question-container">
+                    <div class="question-tags" id="questionTags"></div>
+                    <h3 class="question-text" id="questionText">Loading question...</h3>
+                </div>
+                
+                <div class="answer-container">
+                    <textarea id="answerText" class="answer-input" placeholder="Type your response here..." rows="8"></textarea>
+                </div>
+                
+                <div class="feedback-box hidden" id="feedbackBox"></div>
+                
+                <div class="interview-actions">
+                    <button class="btn-secondary" onclick="location.reload()">
+                        <i class="fas fa-home"></i> Home
+                    </button>
+                    <button class="btn-primary" onclick="submitAnswer()">
+                        <span>Submit Answer</span>
+                        <i class="fas fa-paper-plane"></i>
+                        <div class="btn-glow"></div>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Section (Hidden) -->
+        <section class="results-section hidden" id="resultsSection">
+            <div class="results-header">
+                <h2 class="section-title">Interview Assessment</h2>
+            </div>
+            
+            <div class="results-grid">
+                <div class="glass-card">
+                    <div class="score-display">
+                        <div class="score-circle">
+                            <svg viewBox="0 0 200 200">
+                                <circle cx="100" cy="100" r="90"></circle>
+                                <circle cx="100" cy="100" r="90" class="score-ring" id="scoreRing"></circle>
+                            </svg>
+                            <div class="score-content">
+                                <span class="score-value" id="overallScore">--</span>
+                                <span class="score-label">Overall</span>
+                            </div>
+                        </div>
+                        <div class="recommendation" id="recommendation">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>Loading...</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass-card">
+                    <h3 class="card-title">Detailed Scores</h3>
+                    <div class="score-breakdown" id="scoreBreakdown"></div>
+                </div>
+            </div>
+            
+            <div class="glass-card" style="margin-top: 2rem;">
+                <h3 class="card-title">Key Insights</h3>
+                <div class="insights-grid" id="insightsGrid"></div>
+            </div>
+            
+            <div class="interview-actions" style="margin-top: 2rem;">
+                <button class="btn-primary" onclick="location.reload()">
+                    <i class="fas fa-redo"></i> Start New Interview
+                    <div class="btn-glow"></div>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay hidden" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p class="loading-text" id="loadingText">Processing with AI...</p>
+        </div>
+    </div>
+
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/neural-bg.js"></script>
+    <script>
+        // Session management
+        let sessionId = 'session_' + Date.now();
+        let questions = [];
+        let currentQuestion = 0;
+        let timerInterval = null;
+        let seconds = 0;
+
+        // Utility functions
+        function showLoading(text) {
+            document.getElementById('loadingText').textContent = text || 'Processing...';
+            document.getElementById('loadingOverlay').classList.remove('hidden');
+        }
+        function hideLoading() {
+            document.getElementById('loadingOverlay').classList.add('hidden');
+        }
+        function scrollToUpload() {
+            document.getElementById('uploadSection').scrollIntoView({ behavior: 'smooth' });
+        }
+        function getSessionId() { return sessionId; }
+
+        // Upload area events
+        document.addEventListener('DOMContentLoaded', () => {
+            const uploadArea = document.getElementById('uploadArea');
+            const resumeInput = document.getElementById('resumeInput');
+            
+            uploadArea.addEventListener('click', () => resumeInput.click());
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.style.borderColor = 'var(--color-primary)';
+            });
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.style.borderColor = '';
+            });
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.style.borderColor = '';
+                if (e.dataTransfer.files.length > 0) handleFileUpload(e.dataTransfer.files[0]);
+            });
+            resumeInput.addEventListener('change', (e) => {
+                if (e.target.files.length > 0) handleFileUpload(e.target.files[0]);
+            });
+        });
+
+        // Handle file upload
+        async function handleFileUpload(file) {
+            showLoading('Analyzing resume with AI...');
+            const formData = new FormData();
+            formData.append('resume', file);
+            
+            try {
+                const resp = await fetch('/upload_resume', {
+                    method: 'POST',
+                    headers: { 'X-User-Session-Id': sessionId },
+                    body: formData
+                });
+                const data = await resp.json();
+                hideLoading();
+                
+                if (data.candidate_profile) {
+                    const p = data.candidate_profile;
+                    document.getElementById('profileDisplay').innerHTML = `
+                        <div class="profile-item"><span class="profile-label">Name:</span><span class="profile-value">${p.name || 'N/A'}</span></div>
+                        <div class="profile-item"><span class="profile-label">Email:</span><span class="profile-value">${p.email || 'N/A'}</span></div>
+                        <div class="profile-item"><span class="profile-label">Experience:</span><span class="profile-value">${p.experience || 'N/A'}</span></div>
+                        <div class="profile-item"><span class="profile-label">Skills:</span><div class="skills-tags">${(p.key_skills||[]).map(s=>`<span class="skill-tag">${s}</span>`).join('')}</div></div>
+                    `;
+                    document.getElementById('positionInput').value = p.inferred_position || '';
+                    document.getElementById('uploadSection').classList.add('hidden');
+                    document.getElementById('setupSection').classList.remove('hidden');
+                } else {
+                    alert('Error: ' + (data.error || 'Failed'));
+                }
+            } catch (e) {
+                hideLoading();
+                alert('Error: ' + e.message);
+            }
+        }
+
+        // Start interview
+        async function startInterview() {
+            const position = document.getElementById('positionInput').value;
+            if (!position) { alert('Enter a position'); return; }
+            
+            showLoading('Generating interview questions...');
+            try {
+                const resp = await fetch('/setup_interview', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'X-User-Session-Id': sessionId },
+                    body: JSON.stringify({ position_role: position })
+                });
+                const data = await resp.json();
+                hideLoading();
+                
+                if (data.questions) {
+                    questions = data.questions;
+                    currentQuestion = 0;
+                    document.getElementById('setupSection').classList.add('hidden');
+                    document.getElementById('interviewSection').classList.remove('hidden');
+                    showQuestion();
+                    startTimer();
+                } else {
+                    alert('Error: ' + (data.error || 'Failed'));
+                }
+            } catch (e) {
+                hideLoading();
+                alert('Error: ' + e.message);
+            }
+        }
+
+        // Show question
+        function showQuestion() {
+            const q = questions[currentQuestion];
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            
+            document.getElementById('progressNumber').textContent = `${currentQuestion + 1}/${questions.length}`;
+            document.getElementById('questionTags').innerHTML = (q.tags||[]).map(t=>`<span class="tag">${t}</span>`).join('');
+            document.getElementById('questionText').textContent = q.question;
+            document.getElementById('answerText').value = '';
+            document.getElementById('feedbackBox').classList.add('hidden');
+            
+            // Update progress ring
+            const ring = document.getElementById('progressRing');
+            const circumference = 2 * Math.PI * 45;
+            ring.style.strokeDasharray = `${circumference} ${circumference}`;
+            ring.style.strokeDashoffset = circumference - (progress / 100) * circumference;
+        }
+
+        // Timer
+        function startTimer() {
+            seconds = 0;
+            timerInterval = setInterval(() => {
+                seconds++;
+                const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+                const s = (seconds % 60).toString().padStart(2, '0');
+                document.getElementById('timer').textContent = `${m}:${s}`;
+            }, 1000);
+        }
+
+        // Submit answer
+        async function submitAnswer() {
+            const answer = document.getElementById('answerText').value.trim();
+            if (!answer) { alert('Provide an answer'); return; }
+            
+            showLoading('Evaluating your answer...');
+            try {
+                const resp = await fetch('/submit_answer', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'X-User-Session-Id': sessionId },
+                    body: JSON.stringify({
+                        question_id: questions[currentQuestion].id,
+                        response_text: answer,
+                        duration: document.getElementById('timer').textContent
+                    })
+                });
+                const data = await resp.json();
+                hideLoading();
+                
+                if (data.evaluation) {
+                    const e = data.evaluation;
+                    document.getElementById('feedbackBox').innerHTML = `
+                        <strong>Score: ${e.score}/100</strong><br>
+                        Technical: ${e.technicalScore}% | Communication: ${e.communicationScore}% | Relevance: ${e.relevanceScore}%<br>
+                        <em>${e.feedback}</em>
+                    `;
+                    document.getElementById('feedbackBox').classList.remove('hidden');
+                    
+                    currentQuestion++;
+                    if (currentQuestion < questions.length) {
+                        setTimeout(showQuestion, 2000);
+                    } else {
+                        clearInterval(timerInterval);
+                        setTimeout(showAssessment, 2000);
+                    }
+                }
+            } catch (e) {
+                hideLoading();
+                alert('Error: ' + e.message);
+            }
+        }
+
+        // Show assessment
+        async function showAssessment() {
+            showLoading('Generating assessment report...');
+            try {
+                const resp = await fetch('/get_assessment', { headers: { 'X-User-Session-Id': sessionId } });
+                const data = await resp.json();
+                hideLoading();
+                
+                if (data.assessment) {
+                    const a = data.assessment;
+                    const score = a.overallScore || 0;
+                    
+                    document.getElementById('overallScore').textContent = score;
+                    
+                    // Update score ring
+                    const ring = document.getElementById('scoreRing');
+                    const circumference = 2 * Math.PI * 90;
+                    ring.style.strokeDasharray = `${circumference} ${circumference}`;
+                    ring.style.strokeDashoffset = circumference - (score / 100) * circumference;
+                    
+                    // Recommendation
+                    const recClass = score >= 85 ? 'recommended' : score >= 70 ? 'consider' : 'not-recommended';
+                    document.getElementById('recommendation').innerHTML = `<i class="fas fa-${score >= 70 ? 'check-circle' : 'exclamation-circle'}"></i><span>${a.recommendation || 'N/A'}</span>`;
+                    document.getElementById('recommendation').className = 'recommendation ' + recClass;
+                    
+                    // Detailed scores
+                    const ds = a.detailedScores || {};
+                    document.getElementById('scoreBreakdown').innerHTML = `
+                        <div class="score-item"><div class="score-info"><span class="score-name">Technical Skills</span><span class="score-percent">${ds.technicalSkills || 0}%</span></div><div class="score-bar"><div class="score-bar-fill" style="width: ${ds.technicalSkills || 0}%"></div></div></div>
+                        <div class="score-item"><div class="score-info"><span class="score-name">Communication</span><span class="score-percent">${ds.communication || 0}%</span></div><div class="score-bar"><div class="score-bar-fill" style="width: ${ds.communication || 0}%"></div></div></div>
+                        <div class="score-item"><div class="score-info"><span class="score-name">Soft Skills</span><span class="score-percent">${ds.softSkills || 0}%</span></div><div class="score-bar"><div class="score-bar-fill" style="width: ${ds.softSkills || 0}%"></div></div></div>
+                    `;
+                    
+                    // Insights
+                    const strengths = (a.keyStrengths || []).map(s => `<div class="insight-item strength"><i class="fas fa-check"></i>${s}</div>`).join('');
+                    const improvements = (a.areasForImprovement || []).map(s => `<div class="insight-item improvement"><i class="fas fa-arrow-up"></i>${s}</div>`).join('');
+                    document.getElementById('insightsGrid').innerHTML = `
+                        <div class="insights-column"><h4>Key Strengths</h4>${strengths}</div>
+                        <div class="insights-column"><h4>Areas for Improvement</h4>${improvements}</div>
+                    `;
+                    
+                    document.getElementById('interviewSection').classList.add('hidden');
+                    document.getElementById('resultsSection').classList.remove('hidden');
+                }
+            } catch (e) {
+                hideLoading();
+                alert('Error: ' + e.message);
+            }
+        }
+    </script>
+</body>
+</html>

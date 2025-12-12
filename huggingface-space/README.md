@@ -1,41 +1,40 @@
 ---
-title: HR-AI Interview Simulation
+title: HR-AI Interview Simulation V2
 emoji: 🤖
 colorFrom: indigo
 colorTo: purple
 sdk: docker
 app_file: app.py
-pinned: false
+pinned: true
 license: mit
 ---
 
-# 🤖 HR-AI Interview Simulation Platform
+# 🤖 HR-AI Interview Simulation V2 - Premium Edition
 
-AI-Powered Technical Interview System using Groq LLaMA 3.3 70B
+**Next-Generation AI-Powered Technical Interview Platform**
 
-## Features
-- 📄 Resume Analysis (PDF upload)
-- 🎯 Dynamic Question Generation (10 questions)
-- ✅ Real-time Answer Evaluation with scoring
-- 📊 Comprehensive Assessment Reports
+## ✨ Features
+- 📄 **Resume Analysis** - AI-powered PDF parsing
+- 🎯 **Dynamic Questions** - 15 role-specific questions
+- ✅ **Real-time Evaluation** - Instant scoring & feedback
+- 📊 **Assessment Reports** - Comprehensive insights
+- 🎨 **Premium UI** - Modern glass-morphism design
 
-## How to Use
-1. **Upload Resume** - Upload your PDF resume
-2. **Review Profile** - AI extracts your information
-3. **Start Interview** - Answer 10 AI-generated questions
-4. **Get Assessment** - Receive detailed evaluation report
+## 🚀 How to Use
+1. Upload your PDF resume
+2. Review AI-extracted profile
+3. Enter target position
+4. Answer interview questions
+5. Get detailed assessment
 
-## Technology Stack
+## 🛠 Tech Stack
 - **Backend**: Python Flask
 - **AI**: Groq LLaMA 3.3 70B
-- **Frontend**: HTML5, CSS3, JavaScript
+- **Frontend**: Premium HTML5/CSS3/JS
 
-## Setup (for cloning)
-Add your `GROQ_API_KEY` as a secret in Space settings:
-1. Go to Settings → Repository secrets
-2. Add `GROQ_API_KEY` with your Groq API key
-
-Get your API key at: https://console.groq.com
+## ⚙️ Setup
+Add `GROQ_API_KEY` secret in Space settings.
+Get key: https://console.groq.com
 
 ---
-Made with ❤️ by Chris Daniel
+**HR-AI Simulation V2** by Chris Daniel
