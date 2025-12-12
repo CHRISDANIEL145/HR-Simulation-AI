@@ -73,6 +73,11 @@ def generate_content_with_groq(prompt):
 def index():
     return send_file('static/index.html')
 
+# Serve static assets
+@app.route('/assets/<path:filename>')
+def serve_assets(filename):
+    return send_from_directory('static/assets', filename)
+
 # API Endpoints
 @app.route('/upload_resume', methods=['POST'])
 def upload_resume():

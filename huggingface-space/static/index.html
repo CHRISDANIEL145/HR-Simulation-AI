@@ -9,34 +9,52 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="assets/css/premium.css">
+    <style>
+        .feedback-box { background: rgba(16, 185, 129, 0.1); padding: 20px; border-radius: 10px; margin: 15px 0; border-left: 4px solid var(--color-success); }
+        .feedback-box.hidden { display: none; }
+        .profile-display { display: grid; gap: 1rem; padding: 1.5rem; background: var(--color-surface); border-radius: var(--radius-lg); border: 1px solid var(--glass-border); }
+        .profile-item { display: flex; gap: 1rem; align-items: start; }
+        .profile-label { font-weight: 600; color: var(--color-text-secondary); min-width: 120px; }
+        .profile-value { color: var(--color-text-primary); }
+        .skills-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .skill-tag { padding: 4px 12px; background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 20px; font-size: 14px; color: var(--color-primary); }
+        .form-input { width: 100%; padding: 14px 16px; background: var(--color-surface); border: 1px solid var(--glass-border); border-radius: var(--radius-md); color: var(--color-text-primary); font-size: 16px; }
+        .form-input:focus { outline: none; border-color: var(--color-primary); }
+        .form-label { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; margin-bottom: 8px; color: var(--color-text-secondary); }
+        .insights-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .insights-column h4 { margin-bottom: 1rem; color: var(--color-text-secondary); }
+        .insight-item { padding: 12px; margin: 8px 0; border-radius: 8px; display: flex; align-items: center; gap: 10px; }
+        .insight-item.strength { background: rgba(16, 185, 129, 0.1); border-left: 3px solid var(--color-success); }
+        .insight-item.improvement { background: rgba(239, 68, 68, 0.1); border-left: 3px solid var(--color-danger); }
+        .recommendation.recommended { border-color: var(--color-success); color: var(--color-success); background: rgba(16, 185, 129, 0.1); }
+        .recommendation.consider { border-color: var(--color-warning); color: var(--color-warning); background: rgba(245, 158, 11, 0.1); }
+        .recommendation.not-recommended { border-color: var(--color-danger); color: var(--color-danger); background: rgba(239, 68, 68, 0.1); }
+        .score-item { margin: 1rem 0; }
+        .score-label-row { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
+        .score-name { color: var(--color-text-secondary); }
+        .score-percent { color: var(--color-primary); font-weight: 600; }
+        .score-bar { height: 8px; background: var(--color-surface); border-radius: 4px; overflow: hidden; }
+        .score-bar-fill { height: 100%; background: linear-gradient(90deg, var(--color-primary), var(--color-secondary)); border-radius: 4px; transition: width 1s ease; }
+    </style>
 </head>
 <body>
     <!-- Animated Background -->
     <div class="premium-bg">
         <div class="gradient-mesh"></div>
-        <div class="neural-network">
-            <canvas id="neuralCanvas"></canvas>
-        </div>
+        <div class="neural-network"><canvas id="neuralCanvas"></canvas></div>
     </div>
 
     <!-- Navigation -->
     <nav class="premium-nav">
         <div class="nav-container">
             <div class="nav-brand">
-                <div class="brand-icon">
-                    <i class="fas fa-brain"></i>
-                </div>
+                <div class="brand-icon"><i class="fas fa-brain"></i></div>
                 <span class="brand-text">IntervuAI<span class="brand-pro">Pro</span></span>
             </div>
             <div class="nav-menu">
-                <a href="#" class="nav-link active">
-                    <i class="fas fa-home"></i>
-                    <span>Dashboard</span>
-                </a>
+                <a href="#" class="nav-link active"><i class="fas fa-home"></i><span>Dashboard</span></a>
                 <div class="nav-user">
-                    <div class="user-avatar">
-                        <i class="fas fa-user"></i>
-                    </div>
+                    <div class="user-avatar"><i class="fas fa-user"></i></div>
                     <div class="user-info">
                         <span class="user-name">Guest User</span>
                         <span class="user-role">Premium Access</span>
@@ -49,43 +67,20 @@
     <!-- Main Content -->
     <main class="premium-main">
         <!-- Hero Section -->
-        <section class="hero-section">
+        <section class="hero-section" id="heroSection">
             <div class="hero-content">
-                <div class="hero-badge">
-                    <i class="fas fa-sparkles"></i>
-                    <span>Powered by Advanced AI</span>
-                </div>
-                <h1 class="hero-title">
-                    Next-Generation
-                    <span class="gradient-text">AI Interview</span>
-                    Platform
-                </h1>
-                <p class="hero-subtitle">
-                    Experience intelligent candidate evaluation with real-time AI analysis,
-                    automated scoring, and comprehensive insights.
-                </p>
+                <div class="hero-badge"><i class="fas fa-sparkles"></i><span>Powered by Advanced AI</span></div>
+                <h1 class="hero-title">Next-Generation<br><span class="gradient-text">AI Interview</span><br>Platform</h1>
+                <p class="hero-subtitle">Experience intelligent candidate evaluation with real-time AI analysis, automated scoring, and comprehensive insights.</p>
                 <div class="hero-actions">
-                    <button class="btn-primary" onclick="scrollToUpload()">
-                        <i class="fas fa-rocket"></i>
-                        <span>Start Interview</span>
-                        <div class="btn-glow"></div>
-                    </button>
+                    <button class="btn-primary" onclick="scrollToUpload()"><i class="fas fa-rocket"></i><span>Start Interview</span><div class="btn-glow"></div></button>
                 </div>
                 <div class="hero-stats">
-                    <div class="stat-item">
-                        <div class="stat-value">10K+</div>
-                        <div class="stat-label">Interviews</div>
-                    </div>
+                    <div class="stat-item"><div class="stat-value">10K+</div><div class="stat-label">Interviews</div></div>
                     <div class="stat-divider"></div>
-                    <div class="stat-item">
-                        <div class="stat-value">98%</div>
-                        <div class="stat-label">Accuracy</div>
-                    </div>
+                    <div class="stat-item"><div class="stat-value">98%</div><div class="stat-label">Accuracy</div></div>
                     <div class="stat-divider"></div>
-                    <div class="stat-item">
-                        <div class="stat-value">AI</div>
-                        <div class="stat-label">Powered</div>
-                    </div>
+                    <div class="stat-item"><div class="stat-value">AI</div><div class="stat-label">Powered</div></div>
                 </div>
             </div>
         </section>
@@ -94,36 +89,27 @@
         <section class="upload-section" id="uploadSection">
             <div class="glass-card large">
                 <div class="card-header">
-                    <div class="header-icon">
-                        <i class="fas fa-cloud-upload-alt"></i>
-                    </div>
+                    <div class="header-icon"><i class="fas fa-cloud-upload-alt"></i></div>
                     <div class="header-content">
                         <h2 class="card-title">Upload Resume</h2>
                         <p class="card-subtitle">AI-powered resume analysis in seconds</p>
                     </div>
                 </div>
-                
                 <div class="upload-area" id="uploadArea">
                     <input type="file" id="resumeInput" accept=".pdf" hidden>
-                    <div class="upload-icon">
-                        <i class="fas fa-file-upload"></i>
-                    </div>
+                    <div class="upload-icon"><i class="fas fa-file-upload"></i></div>
                     <h3 class="upload-title">Drop your resume here</h3>
                     <p class="upload-text">or click to browse</p>
-                    <div class="upload-formats">
-                        <span class="format-badge">PDF</span>
-                    </div>
+                    <div class="upload-formats"><span class="format-badge">PDF</span></div>
                 </div>
             </div>
         </section>
 
-        <!-- Setup Section (Hidden) -->
+        <!-- Setup Section -->
         <section class="upload-section hidden" id="setupSection">
             <div class="glass-card large">
                 <div class="card-header">
-                    <div class="header-icon">
-                        <i class="fas fa-user-check"></i>
-                    </div>
+                    <div class="header-icon"><i class="fas fa-user-check"></i></div>
                     <div class="header-content">
                         <h2 class="card-title">Candidate Profile</h2>
                         <p class="card-subtitle">Review and configure interview</p>
@@ -135,19 +121,13 @@
                     <input type="text" id="positionInput" class="form-input" placeholder="e.g., Senior Software Engineer">
                 </div>
                 <div class="interview-actions" style="margin-top: 2rem;">
-                    <button class="btn-secondary" onclick="location.reload()">
-                        <i class="fas fa-arrow-left"></i> Back
-                    </button>
-                    <button class="btn-primary" onclick="startInterview()">
-                        <span>Start Interview</span>
-                        <i class="fas fa-arrow-right"></i>
-                        <div class="btn-glow"></div>
-                    </button>
+                    <button class="btn-secondary" onclick="location.reload()"><i class="fas fa-arrow-left"></i> Back</button>
+                    <button class="btn-primary" onclick="startInterview()"><span>Start Interview</span><i class="fas fa-arrow-right"></i><div class="btn-glow"></div></button>
                 </div>
             </div>
         </section>
 
-        <!-- Interview Section (Hidden) -->
+        <!-- Interview Section -->
         <section class="interview-section hidden" id="interviewSection">
             <div class="glass-card">
                 <div class="interview-header">
@@ -160,42 +140,28 @@
                             <span class="progress-number" id="progressNumber">1/10</span>
                         </div>
                     </div>
-                    <div class="timer">
-                        <i class="fas fa-clock"></i>
-                        <span id="timer">00:00</span>
-                    </div>
+                    <div class="timer"><i class="fas fa-clock"></i><span id="timer">00:00</span></div>
                 </div>
-                
                 <div class="question-container">
                     <div class="question-tags" id="questionTags"></div>
                     <h3 class="question-text" id="questionText">Loading question...</h3>
                 </div>
-                
                 <div class="answer-container">
                     <textarea id="answerText" class="answer-input" placeholder="Type your response here..." rows="8"></textarea>
                 </div>
-                
                 <div class="feedback-box hidden" id="feedbackBox"></div>
-                
                 <div class="interview-actions">
-                    <button class="btn-secondary" onclick="location.reload()">
-                        <i class="fas fa-home"></i> Home
-                    </button>
-                    <button class="btn-primary" onclick="submitAnswer()">
-                        <span>Submit Answer</span>
-                        <i class="fas fa-paper-plane"></i>
-                        <div class="btn-glow"></div>
-                    </button>
+                    <button class="btn-secondary" onclick="location.reload()"><i class="fas fa-home"></i> Home</button>
+                    <button class="btn-primary" onclick="submitAnswer()"><span>Submit Answer</span><i class="fas fa-paper-plane"></i><div class="btn-glow"></div></button>
                 </div>
             </div>
         </section>
 
-        <!-- Results Section (Hidden) -->
+        <!-- Results Section -->
         <section class="results-section hidden" id="resultsSection">
             <div class="results-header">
                 <h2 class="section-title">Interview Assessment</h2>
             </div>
-            
             <div class="results-grid">
                 <div class="glass-card">
                     <div class="score-display">
@@ -209,29 +175,42 @@
                                 <span class="score-label">Overall</span>
                             </div>
                         </div>
-                        <div class="recommendation" id="recommendation">
-                            <i class="fas fa-hourglass-half"></i>
-                            <span>Loading...</span>
+                        <div class="recommendation" id="recommendation"><i class="fas fa-hourglass-half"></i><span>Loading...</span></div>
+                    </div>
+                </div>
+                <div class="glass-card">
+                    <h3 class="card-title">Detailed Scores</h3>
+                    <div class="score-breakdown" id="scoreBreakdown">
+                        <div class="score-item">
+                            <div class="score-label-row"><span class="score-name">Technical Skills</span><span class="score-percent">0%</span></div>
+                            <div class="score-bar"><div class="score-bar-fill" style="width: 0%"></div></div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-label-row"><span class="score-name">Communication</span><span class="score-percent">0%</span></div>
+                            <div class="score-bar"><div class="score-bar-fill" style="width: 0%"></div></div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-label-row"><span class="score-name">Soft Skills</span><span class="score-percent">0%</span></div>
+                            <div class="score-bar"><div class="score-bar-fill" style="width: 0%"></div></div>
                         </div>
                     </div>
                 </div>
-                
-                <div class="glass-card">
-                    <h3 class="card-title">Detailed Scores</h3>
-                    <div class="score-breakdown" id="scoreBreakdown"></div>
-                </div>
             </div>
-            
             <div class="glass-card" style="margin-top: 2rem;">
                 <h3 class="card-title">Key Insights</h3>
-                <div class="insights-grid" id="insightsGrid"></div>
+                <div class="insights-grid" id="insightsGrid">
+                    <div class="insights-column">
+                        <h4><i class="fas fa-check-circle" style="color: var(--color-success);"></i> Strengths</h4>
+                        <ul id="strengthsList" style="list-style: none; padding: 0;"></ul>
+                    </div>
+                    <div class="insights-column">
+                        <h4><i class="fas fa-exclamation-circle" style="color: var(--color-danger);"></i> Areas for Improvement</h4>
+                        <ul id="improvementsList" style="list-style: none; padding: 0;"></ul>
+                    </div>
+                </div>
             </div>
-            
-            <div class="interview-actions" style="margin-top: 2rem;">
-                <button class="btn-primary" onclick="location.reload()">
-                    <i class="fas fa-redo"></i> Start New Interview
-                    <div class="btn-glow"></div>
-                </button>
+            <div class="interview-actions" style="margin-top: 2rem; justify-content: center;">
+                <button class="btn-primary" onclick="location.reload()"><i class="fas fa-redo"></i> Start New Interview<div class="btn-glow"></div></button>
             </div>
         </section>
     </main>
@@ -244,238 +223,629 @@
         </div>
     </div>
 
-    <script src="assets/js/config.js"></script>
-    <script src="assets/js/neural-bg.js"></script>
+    <!-- TensorFlow and BlazeFace for face detection -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.18.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/blazeface@0.0.7/dist/blazeface.min.js"></script>
+    
+    <!-- Config -->
     <script>
-        // Session management
-        let sessionId = 'session_' + Date.now();
-        let questions = [];
-        let currentQuestion = 0;
-        let timerInterval = null;
-        let seconds = 0;
-
-        // Utility functions
-        function showLoading(text) {
-            document.getElementById('loadingText').textContent = text || 'Processing...';
-            document.getElementById('loadingOverlay').classList.remove('hidden');
+        const API_CONFIG = { BASE_URL: window.location.origin, TIMEOUT: 30000 };
+        function getApiUrl(endpoint) { return `${API_CONFIG.BASE_URL}/${endpoint.replace(/^\//, '')}`; }
+        function getSessionId() {
+            let sid = sessionStorage.getItem('sessionId');
+            if (!sid) { sid = 'session_' + Date.now() + '_' + Math.random().toString(36).substring(2, 11); sessionStorage.setItem('sessionId', sid); }
+            return sid;
         }
-        function hideLoading() {
-            document.getElementById('loadingOverlay').classList.add('hidden');
-        }
-        function scrollToUpload() {
-            document.getElementById('uploadSection').scrollIntoView({ behavior: 'smooth' });
-        }
-        function getSessionId() { return sessionId; }
+        window.API_CONFIG = API_CONFIG;
+        window.getApiUrl = getApiUrl;
+        window.getSessionId = getSessionId;
+    </script>
 
-        // Upload area events
-        document.addEventListener('DOMContentLoaded', () => {
-            const uploadArea = document.getElementById('uploadArea');
-            const resumeInput = document.getElementById('resumeInput');
-            
-            uploadArea.addEventListener('click', () => resumeInput.click());
-            uploadArea.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                uploadArea.style.borderColor = 'var(--color-primary)';
-            });
-            uploadArea.addEventListener('dragleave', () => {
-                uploadArea.style.borderColor = '';
-            });
-            uploadArea.addEventListener('drop', (e) => {
-                e.preventDefault();
-                uploadArea.style.borderColor = '';
-                if (e.dataTransfer.files.length > 0) handleFileUpload(e.dataTransfer.files[0]);
-            });
-            resumeInput.addEventListener('change', (e) => {
-                if (e.target.files.length > 0) handleFileUpload(e.target.files[0]);
-            });
-        });
-
-        // Handle file upload
-        async function handleFileUpload(file) {
-            showLoading('Analyzing resume with AI...');
-            const formData = new FormData();
-            formData.append('resume', file);
-            
-            try {
-                const resp = await fetch('/upload_resume', {
-                    method: 'POST',
-                    headers: { 'X-User-Session-Id': sessionId },
-                    body: formData
-                });
-                const data = await resp.json();
-                hideLoading();
-                
-                if (data.candidate_profile) {
-                    const p = data.candidate_profile;
-                    document.getElementById('profileDisplay').innerHTML = `
-                        <div class="profile-item"><span class="profile-label">Name:</span><span class="profile-value">${p.name || 'N/A'}</span></div>
-                        <div class="profile-item"><span class="profile-label">Email:</span><span class="profile-value">${p.email || 'N/A'}</span></div>
-                        <div class="profile-item"><span class="profile-label">Experience:</span><span class="profile-value">${p.experience || 'N/A'}</span></div>
-                        <div class="profile-item"><span class="profile-label">Skills:</span><div class="skills-tags">${(p.key_skills||[]).map(s=>`<span class="skill-tag">${s}</span>`).join('')}</div></div>
-                    `;
-                    document.getElementById('positionInput').value = p.inferred_position || '';
-                    document.getElementById('uploadSection').classList.add('hidden');
-                    document.getElementById('setupSection').classList.remove('hidden');
-                } else {
-                    alert('Error: ' + (data.error || 'Failed'));
-                }
-            } catch (e) {
-                hideLoading();
-                alert('Error: ' + e.message);
+    <!-- Neural Network Animation -->
+    <script>
+    (function() {
+        const canvas = document.getElementById('neuralCanvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        let nodes = [], connections = [];
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; init(); }
+        function init() {
+            nodes = []; connections = [];
+            const nodeCount = Math.floor((canvas.width * canvas.height) / 25000);
+            for (let i = 0; i < nodeCount; i++) {
+                nodes.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, vx: (Math.random() - 0.5) * 0.5, vy: (Math.random() - 0.5) * 0.5, radius: Math.random() * 2 + 1 });
             }
         }
-
-        // Start interview
-        async function startInterview() {
-            const position = document.getElementById('positionInput').value;
-            if (!position) { alert('Enter a position'); return; }
-            
-            showLoading('Generating interview questions...');
-            try {
-                const resp = await fetch('/setup_interview', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'X-User-Session-Id': sessionId },
-                    body: JSON.stringify({ position_role: position })
-                });
-                const data = await resp.json();
-                hideLoading();
-                
-                if (data.questions) {
-                    questions = data.questions;
-                    currentQuestion = 0;
-                    document.getElementById('setupSection').classList.add('hidden');
-                    document.getElementById('interviewSection').classList.remove('hidden');
-                    showQuestion();
-                    startTimer();
-                } else {
-                    alert('Error: ' + (data.error || 'Failed'));
-                }
-            } catch (e) {
-                hideLoading();
-                alert('Error: ' + e.message);
-            }
-        }
-
-        // Show question
-        function showQuestion() {
-            const q = questions[currentQuestion];
-            const progress = ((currentQuestion + 1) / questions.length) * 100;
-            
-            document.getElementById('progressNumber').textContent = `${currentQuestion + 1}/${questions.length}`;
-            document.getElementById('questionTags').innerHTML = (q.tags||[]).map(t=>`<span class="tag">${t}</span>`).join('');
-            document.getElementById('questionText').textContent = q.question;
-            document.getElementById('answerText').value = '';
-            document.getElementById('feedbackBox').classList.add('hidden');
-            
-            // Update progress ring
-            const ring = document.getElementById('progressRing');
-            const circumference = 2 * Math.PI * 45;
-            ring.style.strokeDasharray = `${circumference} ${circumference}`;
-            ring.style.strokeDashoffset = circumference - (progress / 100) * circumference;
-        }
-
-        // Timer
-        function startTimer() {
-            seconds = 0;
-            timerInterval = setInterval(() => {
-                seconds++;
-                const m = Math.floor(seconds / 60).toString().padStart(2, '0');
-                const s = (seconds % 60).toString().padStart(2, '0');
-                document.getElementById('timer').textContent = `${m}:${s}`;
-            }, 1000);
-        }
-
-        // Submit answer
-        async function submitAnswer() {
-            const answer = document.getElementById('answerText').value.trim();
-            if (!answer) { alert('Provide an answer'); return; }
-            
-            showLoading('Evaluating your answer...');
-            try {
-                const resp = await fetch('/submit_answer', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'X-User-Session-Id': sessionId },
-                    body: JSON.stringify({
-                        question_id: questions[currentQuestion].id,
-                        response_text: answer,
-                        duration: document.getElementById('timer').textContent
-                    })
-                });
-                const data = await resp.json();
-                hideLoading();
-                
-                if (data.evaluation) {
-                    const e = data.evaluation;
-                    document.getElementById('feedbackBox').innerHTML = `
-                        <strong>Score: ${e.score}/100</strong><br>
-                        Technical: ${e.technicalScore}% | Communication: ${e.communicationScore}% | Relevance: ${e.relevanceScore}%<br>
-                        <em>${e.feedback}</em>
-                    `;
-                    document.getElementById('feedbackBox').classList.remove('hidden');
-                    
-                    currentQuestion++;
-                    if (currentQuestion < questions.length) {
-                        setTimeout(showQuestion, 2000);
-                    } else {
-                        clearInterval(timerInterval);
-                        setTimeout(showAssessment, 2000);
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            nodes.forEach(node => {
+                node.x += node.vx; node.y += node.vy;
+                if (node.x < 0 || node.x > canvas.width) node.vx *= -1;
+                if (node.y < 0 || node.y > canvas.height) node.vy *= -1;
+                ctx.beginPath(); ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(99, 102, 241, 0.5)'; ctx.fill();
+            });
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 150) {
+                        ctx.beginPath(); ctx.moveTo(nodes[i].x, nodes[i].y); ctx.lineTo(nodes[j].x, nodes[j].y);
+                        ctx.strokeStyle = `rgba(99, 102, 241, ${0.2 * (1 - dist / 150)})`; ctx.stroke();
                     }
                 }
-            } catch (e) {
-                hideLoading();
-                alert('Error: ' + e.message);
             }
+            requestAnimationFrame(animate);
         }
-
-        // Show assessment
-        async function showAssessment() {
-            showLoading('Generating assessment report...');
-            try {
-                const resp = await fetch('/get_assessment', { headers: { 'X-User-Session-Id': sessionId } });
-                const data = await resp.json();
-                hideLoading();
-                
-                if (data.assessment) {
-                    const a = data.assessment;
-                    const score = a.overallScore || 0;
-                    
-                    document.getElementById('overallScore').textContent = score;
-                    
-                    // Update score ring
-                    const ring = document.getElementById('scoreRing');
-                    const circumference = 2 * Math.PI * 90;
-                    ring.style.strokeDasharray = `${circumference} ${circumference}`;
-                    ring.style.strokeDashoffset = circumference - (score / 100) * circumference;
-                    
-                    // Recommendation
-                    const recClass = score >= 85 ? 'recommended' : score >= 70 ? 'consider' : 'not-recommended';
-                    document.getElementById('recommendation').innerHTML = `<i class="fas fa-${score >= 70 ? 'check-circle' : 'exclamation-circle'}"></i><span>${a.recommendation || 'N/A'}</span>`;
-                    document.getElementById('recommendation').className = 'recommendation ' + recClass;
-                    
-                    // Detailed scores
-                    const ds = a.detailedScores || {};
-                    document.getElementById('scoreBreakdown').innerHTML = `
-                        <div class="score-item"><div class="score-info"><span class="score-name">Technical Skills</span><span class="score-percent">${ds.technicalSkills || 0}%</span></div><div class="score-bar"><div class="score-bar-fill" style="width: ${ds.technicalSkills || 0}%"></div></div></div>
-                        <div class="score-item"><div class="score-info"><span class="score-name">Communication</span><span class="score-percent">${ds.communication || 0}%</span></div><div class="score-bar"><div class="score-bar-fill" style="width: ${ds.communication || 0}%"></div></div></div>
-                        <div class="score-item"><div class="score-info"><span class="score-name">Soft Skills</span><span class="score-percent">${ds.softSkills || 0}%</span></div><div class="score-bar"><div class="score-bar-fill" style="width: ${ds.softSkills || 0}%"></div></div></div>
-                    `;
-                    
-                    // Insights
-                    const strengths = (a.keyStrengths || []).map(s => `<div class="insight-item strength"><i class="fas fa-check"></i>${s}</div>`).join('');
-                    const improvements = (a.areasForImprovement || []).map(s => `<div class="insight-item improvement"><i class="fas fa-arrow-up"></i>${s}</div>`).join('');
-                    document.getElementById('insightsGrid').innerHTML = `
-                        <div class="insights-column"><h4>Key Strengths</h4>${strengths}</div>
-                        <div class="insights-column"><h4>Areas for Improvement</h4>${improvements}</div>
-                    `;
-                    
-                    document.getElementById('interviewSection').classList.add('hidden');
-                    document.getElementById('resultsSection').classList.remove('hidden');
-                }
-            } catch (e) {
-                hideLoading();
-                alert('Error: ' + e.message);
-            }
-        }
+        window.addEventListener('resize', resize);
+        resize(); animate();
+    })();
     </script>
+
+    <!-- Exam Security System -->
+    <script>
+    class ExamSecurity {
+        constructor() {
+            this.tabSwitchCount = 0; this.maxTabSwitches = 2; this.isExamMode = false;
+            this.questionTimeLimit = 180; this.questionTimer = null; this.currentQuestionStartTime = null;
+            this.init();
+        }
+        init() {
+            document.addEventListener('contextmenu', (e) => { if (this.isExamMode) { e.preventDefault(); this.showWarning('Right-click disabled'); } });
+            document.addEventListener('copy', (e) => { if (this.isExamMode) { e.preventDefault(); this.showWarning('Copy disabled'); } });
+            document.addEventListener('paste', (e) => { if (this.isExamMode) { e.preventDefault(); this.showWarning('Paste disabled'); } });
+            document.addEventListener('keydown', (e) => {
+                if (this.isExamMode) {
+                    if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J')) || (e.ctrlKey && e.key === 'u')) { e.preventDefault(); return false; }
+                    if (e.ctrlKey && (e.key === 'c' || e.key === 'v' || e.key === 'x')) { e.preventDefault(); this.showWarning('Copy/Paste disabled'); return false; }
+                }
+            });
+            document.addEventListener('visibilitychange', () => { if (this.isExamMode && document.hidden) { const ae = document.activeElement; if (ae && ae.tagName === 'IFRAME') return; this.handleTabSwitch(); } });
+            window.addEventListener('blur', () => { if (this.isExamMode) { const ae = document.activeElement; if (ae && ae.tagName === 'IFRAME') return; setTimeout(() => { if (!document.hasFocus()) this.handleTabSwitch(); }, 100); } });
+            document.addEventListener('fullscreenchange', () => { if (this.isExamMode && !document.fullscreenElement) { this.showWarning('Please stay in fullscreen'); this.enterFullscreen(); } });
+        }
+        handleTabSwitch() {
+            this.tabSwitchCount++;
+            this.logSecurityEvent('tab_switch', { count: this.tabSwitchCount });
+            if (this.tabSwitchCount >= this.maxTabSwitches) { this.terminateExam(); }
+            else { this.showCriticalWarning(`TAB SWITCH DETECTED!\n\nYou have ${this.maxTabSwitches - this.tabSwitchCount} warning(s) remaining.`); }
+        }
+        terminateExam() {
+            this.isExamMode = false;
+            this.logSecurityEvent('exam_terminated', { reason: 'exceeded_tab_switches' });
+            const overlay = document.createElement('div');
+            overlay.className = 'critical-warning-overlay show';
+            overlay.style.zIndex = '99999';
+            overlay.innerHTML = `<div class="critical-warning-box"><div class="warning-icon"><i class="fas fa-ban"></i></div><h3>Interview Terminated</h3><p>You exceeded the maximum tab switches (2).</p><button class="btn-primary" onclick="location.reload()"><span>Go Home</span></button></div>`;
+            document.body.appendChild(overlay);
+        }
+        async startExamMode() {
+            if (!this.checkBrowser()) { this.showBrowserError(); return false; }
+            this.tabSwitchCount = 0;
+            this.enterFullscreen();
+            this.showSecurityNotice();
+            this.logSecurityEvent('exam_started', { browser: this.getBrowserInfo() });
+            return true;
+        }
+        activateExamMode() { this.isExamMode = true; }
+        checkBrowser() { const ua = navigator.userAgent.toLowerCase(); return ua.includes('chrome') || ua.includes('edg') || ua.includes('brave') || ua.includes('opr') || ua.includes('opera'); }
+        getBrowserInfo() { const ua = navigator.userAgent.toLowerCase(); if (ua.includes('edg')) return 'Edge'; if (ua.includes('brave')) return 'Brave'; if (ua.includes('opr') || ua.includes('opera')) return 'Opera'; if (ua.includes('chrome')) return 'Chrome'; return 'Unknown'; }
+        async detectExtensions() { return false; }
+        showBrowserError() {
+            const overlay = document.createElement('div');
+            overlay.className = 'critical-warning-overlay show';
+            overlay.innerHTML = `<div class="critical-warning-box"><div class="warning-icon"><i class="fas fa-exclamation-circle"></i></div><h3>Unsupported Browser</h3><p>Please use Chrome, Edge, Brave, or Opera.</p><button class="btn-primary" onclick="location.reload()"><span>Go Back</span></button></div>`;
+            document.body.appendChild(overlay);
+        }
+        endExamMode() { this.isExamMode = false; this.exitFullscreen(); if (this.questionTimer) clearInterval(this.questionTimer); }
+        enterFullscreen() { const e = document.documentElement; if (e.requestFullscreen) e.requestFullscreen().catch(() => {}); }
+        exitFullscreen() { if (document.exitFullscreen) document.exitFullscreen(); }
+        startQuestionTimer(onTimeout, customTimeLimit = null) {
+            this.currentQuestionStartTime = Date.now();
+            let remaining = customTimeLimit || this.questionTimeLimit;
+            const update = () => {
+                const m = Math.floor(remaining / 60), s = remaining % 60;
+                const el = document.getElementById('timer');
+                if (el) { el.textContent = `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`; el.style.color = remaining < 30 ? 'var(--color-danger)' : 'var(--color-primary)'; }
+            };
+            update();
+            if (this.questionTimer) clearInterval(this.questionTimer);
+            this.questionTimer = setInterval(() => {
+                remaining--;
+                update();
+                if (remaining === 30) this.showWarning('30 seconds remaining!');
+                if (remaining <= 0) { clearInterval(this.questionTimer); this.showWarning('Time up! Moving to next...'); setTimeout(() => { if (onTimeout) onTimeout(); }, 1500); }
+            }, 1000);
+        }
+        stopQuestionTimer() { if (this.questionTimer) clearInterval(this.questionTimer); }
+        getQuestionDuration() {
+            if (this.currentQuestionStartTime) { const d = Math.floor((Date.now() - this.currentQuestionStartTime) / 1000); return `${Math.floor(d/60).toString().padStart(2,'0')}:${(d%60).toString().padStart(2,'0')}`; }
+            return '00:00';
+        }
+        showSecurityNotice() {
+            const notice = document.createElement('div');
+            notice.className = 'security-notice';
+            notice.innerHTML = `<div class="security-notice-content"><div class="security-icon"><i class="fas fa-shield-alt"></i></div><h3>Interview Security Active</h3><ul class="security-rules"><li><i class="fas fa-check"></i> Fullscreen mode enabled</li><li><i class="fas fa-check"></i> Tab switching limited (2 warnings)</li><li><i class="fas fa-check"></i> Copy/paste disabled</li><li><i class="fas fa-check"></i> 3 minutes per question</li></ul><button class="btn-primary" onclick="this.parentElement.parentElement.remove()"><span>I Understand</span></button></div>`;
+            document.body.appendChild(notice);
+        }
+        showWarning(msg) {
+            const w = document.createElement('div');
+            w.className = 'security-warning';
+            w.innerHTML = `<i class="fas fa-exclamation-triangle"></i><span>${msg}</span>`;
+            document.body.appendChild(w);
+            setTimeout(() => w.classList.add('show'), 100);
+            setTimeout(() => { w.classList.remove('show'); setTimeout(() => w.remove(), 300); }, 3000);
+        }
+        showCriticalWarning(msg) {
+            const overlay = document.createElement('div');
+            overlay.className = 'critical-warning-overlay';
+            overlay.innerHTML = `<div class="critical-warning-box"><div class="warning-icon"><i class="fas fa-exclamation-triangle"></i></div><h3>Security Warning</h3><p>${msg.replace(/\n/g, '<br>')}</p><button class="btn-primary" onclick="this.parentElement.parentElement.remove()"><span>I Understand</span></button></div>`;
+            document.body.appendChild(overlay);
+            setTimeout(() => overlay.classList.add('show'), 100);
+        }
+        logSecurityEvent(type, data) { fetch(getApiUrl('log_security'), { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-User-Session-Id': getSessionId() }, body: JSON.stringify({ event_type: type, data: data }) }).catch(() => {}); }
+    }
+    window.examSecurity = new ExamSecurity();
+    </script>
+
+    <!-- Proctoring System -->
+    <script>
+    class ProctoringSystem {
+        constructor() {
+            this.isActive = false; this.stream = null; this.videoElement = null;
+            this.lookAwayCount = 0; this.maxLookAwayWarnings = 2; this.faceDetectionModel = null;
+            this.faceDetectionInterval = null; this.noFaceDetectedTime = 0; this.multipleFacesCount = 0;
+        }
+        async startProctoring() {
+            try {
+                console.log('Loading face detection...');
+                this.faceDetectionModel = await blazeface.load();
+                console.log('Face detection loaded');
+                this.stream = await navigator.mediaDevices.getUserMedia({ video: { width: { ideal: 640 }, height: { ideal: 480 }, facingMode: 'user' }, audio: { echoCancellation: false, noiseSuppression: false } });
+                this.createVideoElement();
+                this.videoElement.srcObject = this.stream;
+                await this.videoElement.play();
+                this.isActive = true;
+                this.startFaceDetection();
+                return true;
+            } catch (error) {
+                console.error('Proctoring error:', error);
+                this.showProctoringError(error);
+                return false;
+            }
+        }
+        createVideoElement() {
+            const container = document.createElement('div');
+            container.id = 'proctoringVideo';
+            container.style.cssText = 'position:fixed;bottom:20px;right:20px;width:200px;height:150px;border:2px solid var(--color-primary);border-radius:var(--radius-lg);overflow:hidden;z-index:9998;box-shadow:0 4px 12px rgba(0,0,0,0.3);';
+            this.videoElement = document.createElement('video');
+            this.videoElement.style.cssText = 'width:100%;height:100%;object-fit:cover;transform:scaleX(-1);';
+            this.videoElement.autoplay = true; this.videoElement.muted = true;
+            const label = document.createElement('div');
+            label.style.cssText = 'position:absolute;top:5px;left:5px;background:rgba(0,0,0,0.7);color:white;padding:4px 8px;border-radius:4px;font-size:12px;display:flex;align-items:center;gap:5px;';
+            label.innerHTML = '<i class="fas fa-video" style="color:var(--color-success);"></i><span>Proctoring Active</span>';
+            container.appendChild(this.videoElement);
+            container.appendChild(label);
+            document.body.appendChild(container);
+        }
+        startFaceDetection() {
+            this.faceDetectionInterval = setInterval(() => { if (this.isActive) this.detectFace(); }, 1000);
+        }
+        async detectFace() {
+            try {
+                if (!this.faceDetectionModel || !this.videoElement) return;
+                const predictions = await this.faceDetectionModel.estimateFaces(this.videoElement, false);
+                const count = predictions.length;
+                this.updateFaceIndicator(count);
+                if (count === 0) { this.noFaceDetectedTime += 1000; if (this.noFaceDetectedTime >= 3000) { this.handleNoFace(); this.noFaceDetectedTime = 0; } }
+                else if (count === 1) { this.noFaceDetectedTime = 0; }
+                else if (count > 1) { this.handleMultipleFaces(count); }
+            } catch (e) { console.error('Face detection error:', e); }
+        }
+        handleNoFace() {
+            this.lookAwayCount++;
+            if (this.lookAwayCount >= this.maxLookAwayWarnings) { this.terminateExam('no_face'); }
+            else { this.showWarning(`NO FACE DETECTED!\n\nYou have ${this.maxLookAwayWarnings - this.lookAwayCount} warning(s) remaining.`); }
+        }
+        handleMultipleFaces(count) {
+            this.multipleFacesCount++;
+            if (this.multipleFacesCount >= 2) { this.terminateExam('multiple_faces'); }
+            else { this.showWarning(`MULTIPLE PEOPLE DETECTED!\n\n${count} faces in frame. Only candidate should be visible.`); }
+        }
+        terminateExam(reason) {
+            this.isActive = false;
+            const overlay = document.createElement('div');
+            overlay.className = 'critical-warning-overlay show';
+            overlay.style.zIndex = '99999';
+            overlay.innerHTML = `<div class="critical-warning-box"><div class="warning-icon"><i class="fas fa-ban"></i></div><h3>Interview Terminated</h3><p>${reason === 'multiple_faces' ? 'Multiple people detected.' : 'Face not detected for too long.'}</p><button class="btn-primary" onclick="location.reload()"><span>Go Home</span></button></div>`;
+            document.body.appendChild(overlay);
+            this.stopProctoring();
+        }
+        updateFaceIndicator(count) {
+            const container = document.getElementById('proctoringVideo');
+            if (!container) return;
+            let indicator = document.getElementById('faceCountIndicator');
+            if (!indicator) {
+                indicator = document.createElement('div');
+                indicator.id = 'faceCountIndicator';
+                indicator.style.cssText = 'position:absolute;top:5px;right:5px;background:rgba(0,0,0,0.7);color:white;padding:4px 8px;border-radius:4px;font-size:12px;font-weight:bold;';
+                container.appendChild(indicator);
+            }
+            if (count === 0) { indicator.style.background = 'rgba(239,68,68,0.9)'; indicator.innerHTML = '<i class="fas fa-user-slash"></i> No Face'; }
+            else if (count === 1) { indicator.style.background = 'rgba(16,185,129,0.9)'; indicator.innerHTML = '<i class="fas fa-user-check"></i> 1 Face'; }
+            else { indicator.style.background = 'rgba(239,68,68,0.9)'; indicator.innerHTML = `<i class="fas fa-users"></i> ${count} Faces`; }
+        }
+        stopProctoring() {
+            this.isActive = false;
+            if (this.faceDetectionInterval) clearInterval(this.faceDetectionInterval);
+            if (this.stream) this.stream.getTracks().forEach(t => t.stop());
+            const container = document.getElementById('proctoringVideo');
+            if (container) container.remove();
+        }
+        showWarning(msg) {
+            const w = document.createElement('div');
+            w.className = 'critical-warning-overlay show';
+            w.style.zIndex = '99999';
+            w.innerHTML = `<div class="critical-warning-box"><div class="warning-icon"><i class="fas fa-exclamation-triangle"></i></div><h3>Proctoring Warning</h3><p>${msg.replace(/\n/g, '<br>')}</p><button class="btn-primary" onclick="this.parentElement.parentElement.remove()"><span>I Understand</span></button></div>`;
+            document.body.appendChild(w);
+        }
+        showProctoringError(error) {
+            const msg = error.name === 'NotAllowedError' ? 'Camera access required. Please allow and refresh.' : 'Failed to access camera. Check device settings.';
+            const overlay = document.createElement('div');
+            overlay.className = 'critical-warning-overlay show';
+            overlay.style.zIndex = '99999';
+            overlay.innerHTML = `<div class="critical-warning-box"><div class="warning-icon"><i class="fas fa-video-slash"></i></div><h3>Camera Access Required</h3><p>${msg}</p><div style="margin-top:2rem;display:flex;gap:1rem;justify-content:center;"><button class="btn-secondary" onclick="location.reload()"><span>Cancel</span></button><button class="btn-primary" onclick="location.reload()"><span>Retry</span></button></div></div>`;
+            document.body.appendChild(overlay);
+        }
+    }
+    window.proctoringSystem = new ProctoringSystem();
+    </script>
+
+    <!-- Main Application -->
+    <script>
+    function scrollToUpload() { document.getElementById('uploadSection')?.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+    function showLoading(msg = 'Processing...') { const o = document.getElementById('loadingOverlay'); if (o) { o.querySelector('.loading-text').textContent = msg; o.classList.remove('hidden'); } }
+    function hideLoading() { document.getElementById('loadingOverlay')?.classList.add('hidden'); }
+    function showAlert(msg, type = 'info') {
+        const a = document.createElement('div');
+        a.className = `alert-toast alert-${type}`;
+        a.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i><span>${msg}</span>`;
+        document.body.appendChild(a);
+        setTimeout(() => a.classList.add('show'), 100);
+        setTimeout(() => { a.classList.remove('show'); setTimeout(() => a.remove(), 300); }, 3000);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const uploadArea = document.getElementById('uploadArea');
+        const resumeInput = document.getElementById('resumeInput');
+        if (uploadArea && resumeInput) {
+            uploadArea.addEventListener('click', () => resumeInput.click());
+            uploadArea.addEventListener('dragover', (e) => { e.preventDefault(); uploadArea.style.borderColor = 'var(--color-primary)'; });
+            uploadArea.addEventListener('dragleave', () => { uploadArea.style.borderColor = ''; });
+            uploadArea.addEventListener('drop', (e) => { e.preventDefault(); uploadArea.style.borderColor = ''; if (e.dataTransfer.files.length > 0) handleFileUpload(e.dataTransfer.files[0]); });
+            resumeInput.addEventListener('change', (e) => { if (e.target.files.length > 0) handleFileUpload(e.target.files[0]); });
+        }
+    });
+
+    async function handleFileUpload(file) {
+        showLoading('Analyzing resume with AI...');
+        const formData = new FormData();
+        formData.append('resume', file);
+        try {
+            const response = await fetch(getApiUrl('upload_resume'), { method: 'POST', body: formData, headers: { 'X-User-Session-Id': getSessionId() } });
+            if (!response.ok) throw new Error('Upload failed');
+            const result = await response.json();
+            hideLoading();
+            if (result.candidate_profile) {
+                sessionStorage.setItem('candidateProfile', JSON.stringify(result.candidate_profile));
+                showAlert('Resume analyzed successfully!', 'success');
+                setTimeout(() => showInterviewSetup(result.candidate_profile), 1000);
+            } else { showAlert('Failed to analyze resume.', 'error'); }
+        } catch (error) { hideLoading(); showAlert('Failed to upload: ' + error.message, 'error'); }
+    }
+
+    function showInterviewSetup(profile) {
+        document.getElementById('uploadSection')?.classList.add('hidden');
+        const setupSection = document.getElementById('setupSection');
+        if (setupSection) {
+            setupSection.classList.remove('hidden');
+            const profileDisplay = document.getElementById('profileDisplay');
+            if (profileDisplay) {
+                profileDisplay.innerHTML = `
+                    <div class="profile-item"><span class="profile-label">Name:</span><span class="profile-value">${profile.name || 'N/A'}</span></div>
+                    <div class="profile-item"><span class="profile-label">Email:</span><span class="profile-value">${profile.email || 'N/A'}</span></div>
+                    <div class="profile-item"><span class="profile-label">Experience:</span><span class="profile-value">${profile.experience || 'N/A'}</span></div>
+                    <div class="profile-item"><span class="profile-label">Skills:</span><div class="skills-tags">${(profile.key_skills || []).map(s => `<span class="skill-tag">${s}</span>`).join('')}</div></div>
+                `;
+            }
+            const posInput = document.getElementById('positionInput');
+            if (posInput && profile.inferred_position) posInput.value = profile.inferred_position;
+        }
+    }
+
+    async function startInterview() {
+        const position = document.getElementById('positionInput')?.value;
+        if (!position) { showAlert('Please enter a position/role', 'error'); return; }
+        showPreExamChecklist(position);
+    }
+
+    async function showPreExamChecklist(position) {
+        const overlay = document.createElement('div');
+        overlay.className = 'critical-warning-overlay show';
+        overlay.id = 'preExamChecklist';
+        overlay.style.zIndex = '99999';
+        overlay.innerHTML = `
+            <div class="critical-warning-box" style="max-width:600px;">
+                <div class="warning-icon" style="background:rgba(99,102,241,0.2);"><i class="fas fa-clipboard-check" style="color:var(--color-primary);"></i></div>
+                <h3>Pre-Interview Checklist</h3>
+                <p style="margin-bottom:1.5rem;">Please ensure all requirements are met:</p>
+                <div class="checklist-items">
+                    <div class="checklist-item" id="check-browser"><i class="fas fa-spinner fa-spin"></i><span>Checking browser...</span></div>
+                    <div class="checklist-item" id="check-camera"><i class="fas fa-spinner fa-spin"></i><span>Requesting camera...</span></div>
+                    <div class="checklist-item" id="check-microphone"><i class="fas fa-spinner fa-spin"></i><span>Requesting microphone...</span></div>
+                    <div class="checklist-item" id="check-questions"><i class="fas fa-spinner fa-spin"></i><span>Generating questions...</span></div>
+                </div>
+                <div id="checklistActions" style="margin-top:2rem;display:none;"><button class="btn-primary" onclick="beginInterview()" style="width:100%;"><i class="fas fa-play"></i><span>Start Interview</span><div class="btn-glow"></div></button></div>
+                <div id="checklistError" style="margin-top:2rem;display:none;"><button class="btn-secondary" onclick="document.getElementById('preExamChecklist').remove()" style="width:100%;"><i class="fas fa-times"></i><span>Cancel</span></button></div>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+        await runPreExamChecks(position);
+    }
+
+    async function runPreExamChecks(position) {
+        let allPassed = true;
+        // Browser check
+        await checkItem('check-browser', async () => { if (!window.examSecurity.checkBrowser()) throw new Error('Unsupported browser'); return 'Browser compatible'; });
+        // Camera check
+        const cameraOk = await checkItem('check-camera', async () => {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            stream.getTracks().forEach(t => t.stop());
+            return 'Camera access granted';
+        });
+        if (!cameraOk) allPassed = false;
+        // Microphone check
+        const micOk = await checkItem('check-microphone', async () => {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            stream.getTracks().forEach(t => t.stop());
+            return 'Microphone access granted';
+        });
+        if (!micOk) allPassed = false;
+        // Questions check
+        const questionsOk = await checkItem('check-questions', async () => {
+            const response = await fetch(getApiUrl('setup_interview'), { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-User-Session-Id': getSessionId() }, body: JSON.stringify({ position_role: position }) });
+            const result = await response.json();
+            if (!result.questions) throw new Error('Failed to generate questions');
+            sessionStorage.setItem('questions', JSON.stringify(result.questions));
+            sessionStorage.setItem('currentQuestion', '0');
+            sessionStorage.setItem('responses', JSON.stringify([]));
+            sessionStorage.setItem('isCodingRole', result.is_coding_role || false);
+            return `${result.questions.length} questions generated`;
+        });
+        if (!questionsOk) allPassed = false;
+        if (allPassed) document.getElementById('checklistActions').style.display = 'block';
+        else document.getElementById('checklistError').style.display = 'block';
+    }
+
+    async function checkItem(itemId, checkFn) {
+        const item = document.getElementById(itemId);
+        if (!item) return false;
+        try {
+            const msg = await checkFn();
+            item.innerHTML = `<i class="fas fa-check-circle"></i><span>${msg}</span>`;
+            item.classList.add('success');
+            return true;
+        } catch (error) {
+            item.innerHTML = `<i class="fas fa-times-circle"></i><span>${error.message}</span>`;
+            item.classList.add('error');
+            return false;
+        }
+    }
+
+    async function beginInterview() {
+        document.getElementById('preExamChecklist')?.remove();
+        showLoading('Initializing secure exam environment...');
+        try {
+            const securityStarted = await window.examSecurity.startExamMode();
+            if (!securityStarted) { hideLoading(); return; }
+            const proctoringStarted = await window.proctoringSystem.startProctoring();
+            if (!proctoringStarted) { hideLoading(); return; }
+            window.examSecurity.activateExamMode();
+            hideLoading();
+            hideAllUIForExam();
+            document.getElementById('setupSection')?.classList.add('hidden');
+            document.getElementById('interviewSection')?.classList.remove('hidden');
+            loadQuestion(0);
+        } catch (error) { hideLoading(); showAlert('Error starting interview: ' + error.message, 'error'); }
+    }
+
+    function hideAllUIForExam() {
+        const nav = document.querySelector('.premium-nav'); if (nav) nav.style.display = 'none';
+        const hero = document.querySelector('.hero-section'); if (hero) hero.style.display = 'none';
+        const bg = document.querySelector('.premium-bg'); if (bg) bg.style.opacity = '0.3';
+        document.body.classList.add('exam-mode');
+    }
+
+    function showAllUIAfterExam() {
+        const nav = document.querySelector('.premium-nav'); if (nav) nav.style.display = 'block';
+        const hero = document.querySelector('.hero-section'); if (hero) hero.style.display = 'flex';
+        const bg = document.querySelector('.premium-bg'); if (bg) bg.style.opacity = '1';
+        document.body.classList.remove('exam-mode');
+    }
+
+    function loadQuestion(index) {
+        const questions = JSON.parse(sessionStorage.getItem('questions') || '[]');
+        const question = questions[index];
+        if (!question) return;
+        const answerTextarea = document.getElementById('answerText');
+        if (answerTextarea) answerTextarea.value = '';
+        document.getElementById('questionText').textContent = question.question;
+        const progressNumber = document.querySelector('.progress-number');
+        if (progressNumber) progressNumber.textContent = `${index + 1}/${questions.length}`;
+        const progress = ((index + 1) / questions.length) * 100;
+        const progressRing = document.querySelector('.progress-ring');
+        if (progressRing) {
+            const circumference = 2 * Math.PI * 45;
+            progressRing.style.strokeDasharray = `${circumference} ${circumference}`;
+            progressRing.style.strokeDashoffset = circumference - (progress / 100) * circumference;
+        }
+        window.examSecurity.startQuestionTimer(() => autoSubmitAndNext(), 180);
+    }
+
+    async function submitAnswer() {
+        const currentIndex = parseInt(sessionStorage.getItem('currentQuestion') || '0');
+        const questions = JSON.parse(sessionStorage.getItem('questions') || '[]');
+        const question = questions[currentIndex];
+        const answerTextarea = document.getElementById('answerText');
+        const answer = answerTextarea?.value.trim();
+        if (!answer) { showAlert('Please provide an answer', 'error'); return; }
+        showLoading('Evaluating your answer...');
+        try {
+            const response = await fetch(getApiUrl('submit_answer'), {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'X-User-Session-Id': getSessionId() },
+                body: JSON.stringify({ question_id: question.id || `q${currentIndex + 1}`, response_text: answer, duration: window.examSecurity.getQuestionDuration() })
+            });
+            if (!response.ok) { const err = await response.json(); throw new Error(err.error || 'Failed to submit'); }
+            const result = await response.json();
+            hideLoading();
+            const responses = JSON.parse(sessionStorage.getItem('responses') || '[]');
+            responses.push({ question: question.question, answer: answer, evaluation: result.evaluation, time_taken: window.examSecurity.getQuestionDuration() });
+            sessionStorage.setItem('responses', JSON.stringify(responses));
+            window.examSecurity.stopQuestionTimer();
+            if (currentIndex < questions.length - 1) { sessionStorage.setItem('currentQuestion', (currentIndex + 1).toString()); loadQuestion(currentIndex + 1); }
+            else { completeInterview(); }
+        } catch (error) {
+            hideLoading();
+            showAlert('Error: ' + error.message, 'error');
+            const currentIndex = parseInt(sessionStorage.getItem('currentQuestion') || '0');
+            const questions = JSON.parse(sessionStorage.getItem('questions') || '[]');
+            if (currentIndex < questions.length - 1) { setTimeout(() => { sessionStorage.setItem('currentQuestion', (currentIndex + 1).toString()); loadQuestion(currentIndex + 1); }, 2000); }
+        }
+    }
+
+    async function autoSubmitAndNext() {
+        const answerTextarea = document.getElementById('answerText');
+        const answer = answerTextarea?.value.trim() || '[No answer - Time expired]';
+        const currentIndex = parseInt(sessionStorage.getItem('currentQuestion') || '0');
+        const questions = JSON.parse(sessionStorage.getItem('questions') || '[]');
+        const question = questions[currentIndex];
+        try {
+            const response = await fetch(getApiUrl('submit_answer'), {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'X-User-Session-Id': getSessionId() },
+                body: JSON.stringify({ question_id: question.id || `q${currentIndex + 1}`, response_text: answer, duration: '03:00', auto_submitted: true })
+            });
+            const result = await response.json();
+            const responses = JSON.parse(sessionStorage.getItem('responses') || '[]');
+            responses.push({ question: question.question, answer: answer, evaluation: result.evaluation, time_taken: '03:00', auto_submitted: true });
+            sessionStorage.setItem('responses', JSON.stringify(responses));
+            if (currentIndex < questions.length - 1) { sessionStorage.setItem('currentQuestion', (currentIndex + 1).toString()); loadQuestion(currentIndex + 1); }
+            else { completeInterview(); }
+        } catch (error) {
+            if (currentIndex < questions.length - 1) { sessionStorage.setItem('currentQuestion', (currentIndex + 1).toString()); loadQuestion(currentIndex + 1); }
+            else { completeInterview(); }
+        }
+    }
+
+    async function completeInterview() {
+        showLoading('Generating your assessment report...');
+        window.examSecurity.endExamMode();
+        window.proctoringSystem.stopProctoring();
+        showAllUIAfterExam();
+        try {
+            const response = await fetch(getApiUrl('get_assessment'), { method: 'GET', headers: { 'X-User-Session-Id': getSessionId() } });
+            if (!response.ok) { const err = await response.json(); throw new Error(err.error || 'Failed to generate assessment'); }
+            const result = await response.json();
+            hideLoading();
+            if (result.assessment) { sessionStorage.setItem('assessment', JSON.stringify(result.assessment)); showResults(); }
+            else { showAlert('Failed to generate assessment', 'error'); }
+        } catch (error) {
+            hideLoading();
+            showAlert('Error: ' + error.message, 'error');
+            setTimeout(() => showResults(), 2000);
+        }
+    }
+
+    function showResults() {
+        document.getElementById('interviewSection')?.classList.add('hidden');
+        document.getElementById('resultsSection')?.classList.remove('hidden');
+        const assessment = JSON.parse(sessionStorage.getItem('assessment') || '{}');
+        if (!assessment || typeof assessment.overallScore === 'undefined') { showAlert('No assessment data', 'error'); return; }
+        const overallScoreEl = document.getElementById('overallScore');
+        if (overallScoreEl) overallScoreEl.textContent = assessment.overallScore;
+        const recommendationEl = document.getElementById('recommendation');
+        if (recommendationEl && assessment.recommendation) {
+            const rec = assessment.recommendation;
+            let icon = 'fa-check-circle', color = 'var(--color-success)';
+            if (rec.toLowerCase().includes('not recommended')) { icon = 'fa-times-circle'; color = 'var(--color-danger)'; }
+            else if (rec.toLowerCase().includes('consider')) { icon = 'fa-exclamation-circle'; color = 'var(--color-warning)'; }
+            recommendationEl.innerHTML = `<i class="fas ${icon}"></i><span>${rec}</span>`;
+            recommendationEl.style.borderColor = color; recommendationEl.style.color = color; recommendationEl.style.background = color + '20';
+        }
+        if (assessment.detailedScores) {
+            const scores = assessment.detailedScores;
+            const scoreItems = document.querySelectorAll('.score-item');
+            if (scoreItems.length >= 3) {
+                const techScore = scores.technicalSkills ?? 0;
+                scoreItems[0].querySelector('.score-percent').textContent = techScore + '%';
+                scoreItems[0].querySelector('.score-bar-fill').style.width = techScore + '%';
+                const commScore = scores.communication ?? 0;
+                scoreItems[1].querySelector('.score-percent').textContent = commScore + '%';
+                scoreItems[1].querySelector('.score-bar-fill').style.width = commScore + '%';
+                const softScore = scores.softSkills ?? 0;
+                scoreItems[2].querySelector('.score-percent').textContent = softScore + '%';
+                scoreItems[2].querySelector('.score-bar-fill').style.width = softScore + '%';
+            }
+        }
+        const scoreRing = document.querySelector('.results-section .score-ring');
+        if (scoreRing) {
+            const score = assessment.overallScore ?? 0;
+            const circumference = 2 * Math.PI * 90;
+            scoreRing.style.strokeDasharray = `${circumference} ${circumference}`;
+            scoreRing.style.strokeDashoffset = circumference - (score / 100) * circumference;
+        }
+        const strengthsList = document.getElementById('strengthsList');
+        if (strengthsList && assessment.keyStrengths && assessment.keyStrengths.length > 0) {
+            strengthsList.innerHTML = assessment.keyStrengths.map(s => `<li style="padding:0.75rem;background:rgba(16,185,129,0.1);border-left:3px solid var(--color-success);margin:0.5rem 0;border-radius:4px;"><i class="fas fa-check-circle" style="color:var(--color-success);margin-right:0.5rem;"></i>${s}</li>`).join('');
+        }
+        const improvementsList = document.getElementById('improvementsList');
+        if (improvementsList && assessment.areasForImprovement && assessment.areasForImprovement.length > 0) {
+            improvementsList.innerHTML = assessment.areasForImprovement.map(a => `<li style="padding:0.75rem;background:rgba(239,68,68,0.1);border-left:3px solid var(--color-danger);margin:0.5rem 0;border-radius:4px;"><i class="fas fa-exclamation-circle" style="color:var(--color-danger);margin-right:0.5rem;"></i>${a}</li>`).join('');
+        }
+    }
+    </script>
+
+    <!-- Additional Styles -->
+    <style>
+    .alert-toast { position: fixed; top: 100px; right: 20px; padding: 16px 24px; background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: var(--radius-lg); display: flex; align-items: center; gap: 12px; z-index: 10000; transform: translateX(400px); transition: transform 0.3s ease; box-shadow: var(--glass-shadow); }
+    .alert-toast.show { transform: translateX(0); }
+    .alert-toast.alert-success { border-color: var(--color-success); color: var(--color-success); }
+    .alert-toast.alert-error { border-color: var(--color-danger); color: var(--color-danger); }
+    .alert-toast.alert-info { border-color: var(--color-primary); color: var(--color-primary); }
+    .checklist-items { display: flex; flex-direction: column; gap: 1rem; margin: 1rem 0; }
+    .checklist-item { display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--color-surface); border-radius: var(--radius-md); border-left: 3px solid var(--color-text-tertiary); }
+    .checklist-item.success { border-left-color: var(--color-success); }
+    .checklist-item.error { border-left-color: var(--color-danger); }
+    .checklist-item i { font-size: 20px; min-width: 20px; }
+    .checklist-item.success i { color: var(--color-success); }
+    .checklist-item.error i { color: var(--color-danger); }
+    .security-notice { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; z-index: 99999; }
+    .security-notice-content { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: var(--radius-xl); padding: var(--spacing-xl); max-width: 500px; text-align: center; }
+    .security-icon { width: 80px; height: 80px; background: linear-gradient(135deg, var(--color-primary), var(--color-secondary)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 36px; margin: 0 auto var(--spacing-lg); }
+    .security-rules { list-style: none; text-align: left; margin: var(--spacing-lg) 0; padding: 0; }
+    .security-rules li { display: flex; align-items: center; gap: var(--spacing-sm); padding: var(--spacing-sm) 0; color: var(--color-text-secondary); }
+    .security-rules i { color: var(--color-success); }
+    .security-warning { position: fixed; top: 100px; right: -400px; padding: var(--spacing-md) var(--spacing-lg); background: rgba(239, 68, 68, 0.95); border: 2px solid var(--color-danger); border-radius: var(--radius-lg); color: white; font-weight: 600; display: flex; align-items: center; gap: var(--spacing-sm); z-index: 99999; transition: right 0.3s ease; box-shadow: 0 8px 32px rgba(239, 68, 68, 0.5); }
+    .security-warning.show { right: 20px; }
+    .critical-warning-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; z-index: 99999; opacity: 0; transition: opacity 0.3s ease; }
+    .critical-warning-overlay.show { opacity: 1; }
+    .critical-warning-box { background: var(--glass-bg); border: 2px solid var(--color-danger); border-radius: var(--radius-xl); padding: var(--spacing-xl); max-width: 500px; text-align: center; animation: shake 0.5s; }
+    @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
+    .warning-icon { width: 100px; height: 100px; background: rgba(239, 68, 68, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 48px; color: var(--color-danger); margin: 0 auto var(--spacing-lg); animation: pulse 1s infinite; }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+    .critical-warning-box h3 { font-size: 28px; color: var(--color-danger); margin-bottom: var(--spacing-md); }
+    .critical-warning-box p { font-size: 16px; color: var(--color-text-secondary); line-height: 1.8; margin-bottom: var(--spacing-lg); }
+    </style>
 </body>
 </html>
