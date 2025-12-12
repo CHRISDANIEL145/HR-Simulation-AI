@@ -140,8 +140,8 @@
                 sessionStorage.setItem('userEmail', email);
                 sessionStorage.setItem('isLoggedIn', 'true');
                 
-                // Redirect to main page
-                window.location.href = 'index.html';
+                // Redirect to main dashboard
+                window.location.href = '/';
             } else {
                 document.getElementById('errorAlert').classList.remove('hidden');
                 document.getElementById('errorMessage').textContent = 'Please enter both email and password';
@@ -152,7 +152,7 @@
             // Mock social login
             sessionStorage.setItem('userName', provider + '_user');
             sessionStorage.setItem('isLoggedIn', 'true');
-            window.location.href = 'index.html';
+            window.location.href = '/';
         }
     </script>
 </body>

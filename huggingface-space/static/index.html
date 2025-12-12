@@ -305,5 +305,25 @@
     <script src="assets/js/exam-security.js"></script>
     <script src="assets/js/proctoring.js"></script>
     <script src="assets/js/premium-app.js"></script>
+    <script>
+        // Load username from session
+        document.addEventListener('DOMContentLoaded', function() {
+            const userName = sessionStorage.getItem('userName');
+            const userNameEl = document.getElementById('userName');
+            if (userName && userNameEl) {
+                userNameEl.textContent = userName;
+            }
+            
+            // Handle logout
+            const logoutBtn = document.querySelector('.logout-btn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    sessionStorage.clear();
+                    window.location.href = 'login.html';
+                });
+            }
+        });
+    </script>
 </body>
 </html>

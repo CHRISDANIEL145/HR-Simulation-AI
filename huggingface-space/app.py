@@ -71,15 +71,18 @@ def generate_content_with_groq(prompt):
 
 # Serve main page
 @app.route('/')
+@app.route('/index.html')
 def index():
     return send_file('static/index.html')
 
 # Serve login page
+@app.route('/login')
 @app.route('/login.html')
 def login():
     return send_file('static/login.html')
 
 # Serve signup page
+@app.route('/signup')
 @app.route('/signup.html')
 def signup():
     return send_file('static/signup.html')
