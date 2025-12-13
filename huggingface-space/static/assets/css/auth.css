@@ -239,3 +239,253 @@
         max-width: 100%;
     }
 }
+
+
+/* ============================================
+   AUTH PAGES - RESPONSIVE DESIGN
+   ============================================ */
+
+/* Tablets (768px - 1023px) */
+@media (max-width: 1023px) {
+    .auth-container {
+        flex-direction: column;
+        padding: var(--spacing-md);
+        gap: var(--spacing-lg);
+    }
+    
+    .auth-card {
+        max-width: 100%;
+        padding: var(--spacing-lg);
+    }
+    
+    .auth-features {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .feature-item {
+        flex: 1;
+        min-width: 200px;
+        max-width: 250px;
+        text-align: center;
+        align-items: center;
+    }
+}
+
+/* Small Tablets / Large Phones (600px - 767px) */
+@media (max-width: 767px) {
+    .auth-container {
+        padding: var(--spacing-sm);
+        min-height: 100vh;
+        justify-content: flex-start;
+        padding-top: var(--spacing-lg);
+    }
+    
+    .auth-card {
+        padding: var(--spacing-md);
+        border-radius: var(--radius-lg);
+    }
+    
+    .auth-title {
+        font-size: 26px;
+    }
+    
+    .auth-subtitle {
+        font-size: 14px;
+    }
+    
+    .brand-logo {
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .brand-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+    
+    .brand-text {
+        font-size: 20px;
+    }
+    
+    .form-input {
+        padding: 12px 14px;
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+    
+    .form-options {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+        align-items: flex-start;
+    }
+    
+    .btn-primary, .btn-secondary {
+        padding: 14px 20px;
+        font-size: 15px;
+    }
+    
+    .social-login {
+        gap: var(--spacing-xs);
+    }
+    
+    .btn-social {
+        padding: 12px;
+        font-size: 18px;
+    }
+    
+    .auth-features {
+        display: none; /* Hide features on mobile to save space */
+    }
+    
+    .feature-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
+    }
+    
+    .feature-item h3 {
+        font-size: 16px;
+    }
+    
+    .feature-item p {
+        font-size: 13px;
+    }
+}
+
+/* Extra Small Phones (< 480px) */
+@media (max-width: 479px) {
+    .auth-container {
+        padding: var(--spacing-xs);
+        padding-top: var(--spacing-md);
+    }
+    
+    .auth-card {
+        padding: var(--spacing-sm);
+        border-radius: var(--radius-md);
+    }
+    
+    .auth-header {
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .auth-title {
+        font-size: 22px;
+    }
+    
+    .auth-subtitle {
+        font-size: 13px;
+    }
+    
+    .brand-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
+    }
+    
+    .brand-text {
+        font-size: 18px;
+    }
+    
+    .form-label {
+        font-size: 13px;
+    }
+    
+    .form-input {
+        padding: 10px 12px;
+    }
+    
+    .checkbox-label {
+        font-size: 13px;
+    }
+    
+    .link-primary {
+        font-size: 13px;
+    }
+    
+    .btn-primary {
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+    
+    .btn-social {
+        padding: 10px;
+        font-size: 16px;
+    }
+    
+    .auth-divider span {
+        font-size: 12px;
+    }
+    
+    .auth-footer {
+        font-size: 13px;
+    }
+    
+    .alert {
+        padding: var(--spacing-sm);
+        font-size: 13px;
+    }
+}
+
+/* Landscape Mode for Phones */
+@media (max-height: 600px) and (orientation: landscape) {
+    .auth-container {
+        flex-direction: row;
+        align-items: flex-start;
+        padding-top: var(--spacing-sm);
+    }
+    
+    .auth-card {
+        max-width: 400px;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    
+    .auth-features {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    
+    .feature-item {
+        flex-direction: row;
+        text-align: left;
+        align-items: center;
+    }
+    
+    .feature-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+        flex-shrink: 0;
+    }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .form-input,
+    .btn-primary,
+    .btn-secondary,
+    .btn-social {
+        min-height: 48px;
+    }
+    
+    .checkbox-label input[type="checkbox"] {
+        width: 22px;
+        height: 22px;
+    }
+    
+    .btn-social:hover {
+        transform: none;
+    }
+}
+
+/* Safe Area for Notched Phones */
+@supports (padding: max(0px)) {
+    .auth-container {
+        padding-left: max(var(--spacing-sm), env(safe-area-inset-left));
+        padding-right: max(var(--spacing-sm), env(safe-area-inset-right));
+        padding-bottom: max(var(--spacing-sm), env(safe-area-inset-bottom));
+    }
+}

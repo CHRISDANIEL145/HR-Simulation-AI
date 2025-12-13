@@ -132,7 +132,7 @@ function showInterviewSetup(profile) {
                 </div>
                 <div class="profile-item">
                     <span class="profile-label">Experience:</span>
-                    <span class="profile-value">${profile.experience || 'N/A'}</span>
+                    <span class="profile-value">${typeof profile.experience === 'object' ? JSON.stringify(profile.experience) : (profile.experience || 'N/A')}</span>
                 </div>
                 <div class="profile-item">
                     <span class="profile-label">Skills:</span>

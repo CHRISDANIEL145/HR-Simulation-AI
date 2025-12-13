@@ -69,10 +69,15 @@ def generate_content_with_groq(prompt):
         print(f"Groq Error: {e}")
         return None
 
-# Serve main page
+# Serve main page - redirect to signup first
 @app.route('/')
+def home():
+    return send_file('static/signup.html')
+
+# Serve dashboard
+@app.route('/dashboard')
 @app.route('/index.html')
-def index():
+def dashboard():
     return send_file('static/index.html')
 
 # Serve login page
@@ -106,13 +111,28 @@ def upload_resume():
     if not text.strip():
         return jsonify({'error': 'Cannot extract text from PDF'}), 400
     
-    prompt = f'''Analyze resume: {{"name":"","email":"","experience":"","key_skills":[],"inferred_position":""}}
-Resume: {text[:8000]}'''
+    prompt = f'''Analyze this resume and extract information. Return JSON with these exact fields:
+- name: candidate's full name (string)
+- email: email address (string)  
+- experience: work experience summary as a simple string like "5 years in software development" or "2 roles (3 months, 2 months)"
+- key_skills: array of skill strings like ["Python", "JavaScript", "React"]
+- inferred_position: best matching job title (string)
+
+Return ONLY valid JSON: {{"name":"","email":"","experience":"","key_skills":[],"inferred_position":""}}
+
+Resume text:
+{text[:8000]}'''
     
     resp = generate_content_with_groq(prompt)
     if resp:
         profile = json.loads(resp)
         if not isinstance(profile.get('key_skills'), list): profile['key_skills'] = []
+        # Ensure experience is a string
+        if isinstance(profile.get('experience'), dict):
+            exp = profile['experience']
+            profile['experience'] = f"{exp.get('years', '')} years" if 'years' in exp else str(exp)
+        elif isinstance(profile.get('experience'), list):
+            profile['experience'] = ', '.join(str(e) for e in profile['experience'])
         session['candidate_profile'] = profile
         return jsonify({'message': 'Success', 'candidate_profile': profile, 'session_id': session_id}), 200
     return jsonify({'error': 'AI failed'}), 500

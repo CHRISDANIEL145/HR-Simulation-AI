@@ -1,31 +1,72 @@
-// API Configuration for HuggingFace Spaces
-const API_CONFIG = {
-    // Base URL - same origin for HuggingFace deployment
-    BASE_URL: window.location.origin,
+// IntervuAI Pro - Configuration
+
+const CONFIG = {
+    API_BASE_URL: '',
+    SESSION_KEY: 'intervuai_session',
     
-    // Timeout for API requests (in milliseconds)
-    TIMEOUT: 30000,
+    // Interview settings
+    TOTAL_QUESTIONS: 15,
+    TIME_PER_QUESTION: 300, // 5 minutes in seconds
     
-    // Session storage key
-    SESSION_KEY: 'hr_ai_session_id'
+    // File upload settings
+    MAX_FILE_SIZE: 10 * 1024 * 1024, // 10MB
+    ALLOWED_FILE_TYPES: ['application/pdf', 'application/msword', 
+                         'application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
+    
+    // Score thresholds
+    SCORE_EXCELLENT: 85,
+    SCORE_GOOD: 70,
+    SCORE_AVERAGE: 50
 };
 
-// Helper function to get API URL
-function getApiUrl(endpoint) {
-    return `${API_CONFIG.BASE_URL}/${endpoint.replace(/^\//, '')}`;
-}
-
-// Session ID management
+// Generate or retrieve session ID
 function getSessionId() {
-    let sessionId = sessionStorage.getItem('sessionId');
+    let sessionId = sessionStorage.getItem(CONFIG.SESSION_KEY);
     if (!sessionId) {
-        sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substring(2, 11);
-        sessionStorage.setItem('sessionId', sessionId);
+        sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        sessionStorage.setItem(CONFIG.SESSION_KEY, sessionId);
     }
     return sessionId;
 }
 
-// Export for use in other modules
-window.API_CONFIG = API_CONFIG;
-window.getApiUrl = getApiUrl;
-window.getSessionId = getSessionId;
+// API helper functions
+async function apiRequest(endpoint, method = 'GET', data = null) {
+    const options = {
+        method,
+        headers: {
+            'Content-Type': 'application/json',
+            'X-User-Session-Id': getSessionId()
+        }
+    };
+    
+    if (data && method !== 'GET') {
+        options.body = JSON.stringify(data);
+    }
+    
+    try {
+        const response = await fetch(CONFIG.API_BASE_URL + endpoint, options);
+        return await response.json();
+    } catch (error) {
+        console.error('API Error:', error);
+        throw error;
+    }
+}
+
+async function uploadFile(endpoint, file) {
+    const formData = new FormData();
+    formData.append('resume', file);
+    
+    try {
+        const response = await fetch(CONFIG.API_BASE_URL + endpoint, {
+            method: 'POST',
+            headers: {
+                'X-User-Session-Id': getSessionId()
+            },
+            body: formData
+        });
+        return await response.json();
+    } catch (error) {
+        console.error('Upload Error:', error);
+        throw error;
+    }
+}
