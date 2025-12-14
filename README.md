@@ -1,5 +1,7 @@
 # 🤖 HR-AI Interview Simulation Platform
 
+Application link:" https://huggingface.co/spaces/Danielchris145/HR-AI-Interview "
+
 [![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://python.org)
 [![PHP](https://img.shields.io/badge/PHP-8.0+-purple.svg)](https://php.net)
 [![Flask](https://img.shields.io/badge/Flask-3.x-green.svg)](https://flask.palletsprojects.com)
